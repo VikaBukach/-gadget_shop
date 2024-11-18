@@ -19,9 +19,6 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
         Model::preventLazyLoading(!app()->isProduction());
@@ -32,11 +29,11 @@ class AppServiceProvider extends ServiceProvider
         });
 
         // Request lifecycle
-        $kernel = app(HttpKernel::class); // Застосовується для HTTP-запитів
+        $kernel = app(HttpKernel::class); //  для HTTP-запитів
         $kernel->whenRequestLifecycleIsLongerThan(
             CarbonInterval::seconds(4),
             function () {
-                // Додати логіку для тривалих запитів
+                 // для тривалих запитів:
             }
         );
     }
