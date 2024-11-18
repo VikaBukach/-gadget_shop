@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Providers;
+use Illuminate\Contracts\Http\Kernel as HttpKernel;
 
-
+use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
@@ -30,6 +31,14 @@ class AppServiceProvider extends ServiceProvider
             // Notify development team...
         });
 
-
+        // Request lifecycle
+        $kernel = app(HttpKernel::class); // Застосовується для HTTP-запитів
+        $kernel->whenRequestLifecycleIsLongerThan(
+            CarbonInterval::seconds(4),
+            function () {
+                // Додати логіку для тривалих запитів
+            }
+        );
     }
+
 }
