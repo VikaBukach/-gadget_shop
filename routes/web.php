@@ -2,18 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 
-// Для глобального ліміту
-//Route::middleware(['throttle:global'])->get('/', function () {
-//    logger()
-//        ->channel('telegram')
-//        ->debug('Hello world');
-//    return view('welcome');
-//});
-
-Route::get('/test-log', function () {
-    logger()->channel('telegram')->debug('Test message to Telegram');
-    return 'Message sent to Telegram!';
+ //Для глобального ліміту
+Route::middleware(['throttle:global'])->get('/', function () {
+    logger()
+        ->channel('telegram')
+        ->debug('Hello world');
+    return view('welcome');
 });
+
+//Route::get('/test-log', function () {
+//    logger()->channel('telegram')->debug('Test message to Telegram');
+//    return 'Message sent to Telegram!';
+//});
 
 
 // Для API ліміту
