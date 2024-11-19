@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Logging\Telegram;
-use app\Services\Telegram\TelegramBotApi;
+namespace app\Logging\Telegram;
+namespace app\Services\Telegram;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
 use Monolog\LogRecord;
 
-class TelegramLoggerHandler extends AbstractProcessingHandler
+final class TelegramLoggerHandler extends AbstractProcessingHandler
 {
     protected int $chatId;
     protected string $token;

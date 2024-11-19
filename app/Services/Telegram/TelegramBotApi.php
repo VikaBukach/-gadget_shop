@@ -4,7 +4,7 @@ namespace app\Services\Telegram;
 
 use Illuminate\Support\Facades\Http;
 
-class TelegramBotApi
+final class TelegramBotApi
 {
     public const HOST = 'https://api.telegram.org/bot';
 
@@ -25,7 +25,6 @@ class TelegramBotApi
                 'text' => $text
             ]
         );
-
     }
 
 }
