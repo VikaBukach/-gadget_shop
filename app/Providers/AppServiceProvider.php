@@ -7,7 +7,7 @@ use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
-use LDAP\Connection;
+use Illuminate\Database\Connection;
 
 class AppServiceProvider extends ServiceProvider
 {
