@@ -11,40 +11,24 @@ use Illuminate\Database\Connection;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
-    public function register(): void
-    {
-        //
-    }
-
     public function boot(): void
     {
         Model::shouldBeStrict(!app()->isProduction());
 
         if(app()->isProduction()) {
-            //Логування повільних SQL-запитів (з тривалістю більше 500 мс)
-            DB::whenQueryingForLongerThan(500, function (Connection $connection) {
-                logger()
-                    ->channel('telegram')  //записує повідомлення до логів через канал telegram
-                    ->debug('whenQueryingForLongerThan:' . $connection->totalQueryDuration());
-            });
-
             //Моніторинг і логування окремих SQL-запитів.
             DB::listen(function ($query) {
                 if($query->time > 100) {
                     logger()
                         ->channel('telegram')
-                        ->debug('whenQueryingForLongerThan:' . $query->sql, $query->bindings);
+                        ->debug('query longer than 1s:' . $query->sql, $query->bindings);
                 }
             });
-            // Request lifecycle
-            $kernel = app(HttpKernel::class); //  для HTTP-запитів
 
-            $kernel->whenRequestLifecycleIsLongerThan(
+            // Request lifecycle //  для HTTP-запитів
+            app(HttpKernel::class)->whenRequestLifecycleIsLongerThan(
                 CarbonInterval::seconds(4),
-                function () {
+                function() {
                     logger()
                         ->channel('telegram')
                         ->debug('whenQueryingForLongerThan:' . request()->url());
