@@ -21,26 +21,35 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        Model::preventLazyLoading(!app()->isProduction());
-        Model::preventSilentlyDiscardingAttributes(!app()->isProduction());
+        Model::shouldBeStrict(!app()->isProduction());
 
-        DB::whenQueryingForLongerThan(500, function (Connection $connection) {
-            logger()
-                ->channel('telegram')
-                ->debug('whenQueryingForLongerThan:' . $connection->query()->toSql());
-        });
-
-        // Request lifecycle
-        $kernel = app(HttpKernel::class); //  для HTTP-запитів
-
-        $kernel->whenRequestLifecycleIsLongerThan(
-            CarbonInterval::seconds(4),
-            function () {
+        if(app()->isProduction()) {
+            //Логування повільних SQL-запитів (з тривалістю більше 500 мс)
+            DB::whenQueryingForLongerThan(500, function (Connection $connection) {
                 logger()
-                    ->channel('telegram')
-                    ->debug('whenQueryingForLongerThan:' . request()->url());
-            }
-        );
-    }
+                    ->channel('telegram')  //записує повідомлення до логів через канал telegram
+                    ->debug('whenQueryingForLongerThan:' . $connection->totalQueryDuration());
+            });
 
+            //Моніторинг і логування окремих SQL-запитів.
+            DB::listen(function ($query) {
+                if($query->time > 100) {
+                    logger()
+                        ->channel('telegram')
+                        ->debug('whenQueryingForLongerThan:' . $query->sql, $query->bindings);
+                }
+            });
+            // Request lifecycle
+            $kernel = app(HttpKernel::class); //  для HTTP-запитів
+
+            $kernel->whenRequestLifecycleIsLongerThan(
+                CarbonInterval::seconds(4),
+                function () {
+                    logger()
+                        ->channel('telegram')
+                        ->debug('whenQueryingForLongerThan:' . request()->url());
+                }
+            );
+        }
+    }
 }
