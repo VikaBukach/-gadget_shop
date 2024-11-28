@@ -20,14 +20,16 @@ class ProductFactory extends Factory
         return [
             'title' => ucfirst($this->faker->words(2, true)),
             'brand_id' => Brand::query()->inRandomOrder()->value('id'),
-            'thumbnail' => '',
+//            'thumbnail' => $this->faker->imageUrl(),// Генерує випадкову URL картинку
+            'thumbnail' => 'tests/Fixtures/images/products/1.jpg',  // статична картинка
+
+            //img повинні бути завантажені у відповідну директорію на сервері (storage/app/public/images/products/),
 //            'thumbnail' => $this->faker->file(
 //                base_path('/tests/Fixtures/images/products'),
 //                storage_path('/app/public/images/products'),
 //                false
 //            ),
             'price' => $this->faker->numberBetween(1000, 100000),
-
         ];
     }
 }
