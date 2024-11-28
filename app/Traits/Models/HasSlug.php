@@ -17,15 +17,6 @@ trait HasSlug
             }
         });
     }
-//    {
-//        static::creating(function (Model $item) {
-//         //перевірка, якщо slug не задано. генеруємо його
-//            if(empty($item->slug)) {
-//                $source = $item->{static::slugFrom()} ?? '';
-//                $item->slug = Str::slug($source) . '-' . time();
-//            }
-//        });
-//    }
 
     // Поле для створення slug
     public static function slugFrom():string
