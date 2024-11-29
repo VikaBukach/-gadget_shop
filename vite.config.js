@@ -14,7 +14,7 @@ export default defineConfig({
     ],
     build: {
         rollupOptions: {
-            assetsInclude: ['**/*.svg'],
+            assetsInclude: ['resources/images/**/*.svg'], // Включаємо SVG файли з resources/images
         },
     },
 });

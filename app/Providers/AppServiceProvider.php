@@ -40,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
     public function register():void
     {
         $providers = [
-            ViewServicesProvider::class,
+//            ViewServicesProvider::class,
         ];
 
 
