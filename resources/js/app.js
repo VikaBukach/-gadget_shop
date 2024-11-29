@@ -1,8 +1,13 @@
 import './bootstrap';
 import './main.js';
 
-import Alpine from 'alpinejs';
+import.meta.glob([
+    '../images/**',
+    '../fonts/**'
+])
 
-window.Alpine = Alpine;
-
-Alpine.start();
+// import Alpine from 'alpinejs';
+//
+// window.Alpine = Alpine;
+//
+// Alpine.start();

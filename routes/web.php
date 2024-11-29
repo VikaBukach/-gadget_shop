@@ -4,12 +4,8 @@ use Illuminate\Support\Facades\Route;
 
  //Для глобального ліміту
 Route::middleware(['throttle:global'])->get('/', function () {
-//    logger()
-//        ->channel('telegram')
-//        ->info('123');
-
     return view('welcome');
-});
+})->name('home');
 
 
 
