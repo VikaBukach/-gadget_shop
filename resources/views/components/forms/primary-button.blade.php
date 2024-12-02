@@ -1,3 +1,3 @@
-<div>
-    <!-- Simplicity is the ultimate sophistication. - Leonardo da Vinci -->
-</div>
+<button type="submit" class="w-full btn btn-pink">
+    {{ $slot }}
+</button>
