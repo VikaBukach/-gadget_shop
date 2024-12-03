@@ -3,7 +3,6 @@
     'isError' => false
     ])
 
-
     <input
     type="{{ $type }}"
     {{ $attributes->class([

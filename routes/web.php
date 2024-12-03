@@ -7,6 +7,7 @@ Route::middleware(['throttle:global'])->get(\App\Http\Controllers\HomeController
 
 Route::middleware(['throttle:global'])->controller(\App\Http\Controllers\AuthController::class)->group(function (){
     Route::get('/login', 'index')->name('login');
+    Route::post('/login', 'signIn')->name('signIn');
     Route::get('/sign-up', 'signUp')->name('signUp');
 
 

@@ -2,7 +2,11 @@
 
 @section('title', 'Реєстрація')
 @section('content')
-    <x-forms.auth-forms title="Реєстрація" action="">
+    <x-forms.auth-forms
+        title="Реєстрація"
+        action=""
+        method="POST"
+    >
         @csrf
 
         <x-forms.text-input

@@ -2,9 +2,14 @@
     <h1 class="mb-5 text-lg font-semibold">
         {{ $title }}
     </h1>
-    <form class="space-y-3" action="{{ $action }}">
+    <form
+        class="space-y-3"
+        action="{{ $action }}"
+        method="{{ $method }}"
+    >
         {{ $slot }}
     </form>
+
     {{ $socialAuth }}
 
     {{ $buttons }}

@@ -2,7 +2,12 @@
 
 @section('title', 'Вхід до аккаунту')
 @section('content')
-    <x-forms.auth-forms title="Вхід до аккаунту" action="">
+    <x-forms.auth-forms
+        title="Вхід до аккаунту"
+        action="{{ route('signIn') }}"
+        method="POST"
+    >
+
         @csrf
 
         <x-forms.text-input
@@ -38,7 +43,7 @@
                         <svg class="shrink-0 absolute left-4 w-5 sm:w-6 h-5 sm:h-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M15.833.833H4.167A4.172 4.172 0 0 0 0 5v10a4.172 4.172 0 0 0 4.167 4.167h11.666A4.172 4.172 0 0 0 20 15V5A4.172 4.172 0 0 0 15.833.833ZM4.167 2.5h11.666a2.5 2.5 0 0 1 2.317 1.572l-6.382 6.383a2.506 2.506 0 0 1-3.536 0L1.85 4.072A2.5 2.5 0 0 1 4.167 2.5Zm11.666 15H4.167a2.5 2.5 0 0 1-2.5-2.5V6.25l5.386 5.383a4.172 4.172 0 0 0 5.894 0l5.386-5.383V15a2.5 2.5 0 0 1-2.5 2.5Z"/>
                         </svg>
-                        <span class="grow text-xxs md:text-xs font-bold text-center">Почта</span>
+                        <span class="grow text-xxs md:text-xs font-bold text-center">Пошта</span>
                     </a>
                 </li>
                 <li>
@@ -55,7 +60,7 @@
         <x-slot:buttons>
             <div class="space-y-3 mt-5">
                 <div class="text-xxs md:text-xs"><a href="lost-password.html" class="text-white hover:text-white/70 font-bold">Забули пароль?</a></div>
-                <div class="text-xxs md:text-xs"><a href="register.html" class="text-white hover:text-white/70 font-bold">Регістрація</a></div>
+                <div class="text-xxs md:text-xs"><a href="{{ route('signUp') }}" class="text-white hover:text-white/70 font-bold">Реєстрація</a></div>
             </div>
         </x-slot:buttons>
     </x-forms.auth-forms>
