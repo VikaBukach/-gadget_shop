@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\HomeController;
 use App\Notifications\NewUserNotification;
+use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use models\users\User;
 
@@ -40,10 +44,9 @@ Route::middleware('throttle:api')->get('/api/user', function () {
     return response()->json(['user' => 'data']);
 });
 
-
-//Route::get('/test', function (Request $request) {
-//    echo 'tttt';
-//
-//
-//
+//Route::get('/test', function () {
+//    Mail::raw('повідомлення', function ($mail) {
+//        $mail->to('віка@test.test')
+//            ->subject('Заголовок');
+//    });
 //});
