@@ -28,6 +28,7 @@
         </x-forms.primary-button>
 
 
+        <x-slot:socialAuth></x-slot:socialAuth>
         <x-slot:buttons>
             <div class="space-y-3 mt-5">
                 <div class="text-xxs md:text-xs"><a href="{{ route('login') }}" class="text-white hover:text-white/70 font-bold">Відновити</a></div>
